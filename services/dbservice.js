@@ -13,7 +13,29 @@ const updateLocations = async () => {
 
         const dbLocation = new Beach({
             _id: id,
+
             name: apiLocation.NameMobileWeb,
+            district: apiLocation.DISTRICT,
+            county: apiLocation.COUNTY,
+            description: apiLocation.DescriptionMobileWeb,
+
+            details: {
+                fee: ynBool(apiLocation.FEE),
+                parking: ynBool(apiLocation.PARKING),
+                disabled_access: ynBool(apiLocation.DSABLDACSS),
+                restrooms: ynBool(apiLocation.RESTROOMS),
+                dog_friendly: ynBool(apiLocation.DOG_FRIENDLY),
+                picnic_area: ynBool(apiLocation.PCNC_AREA),
+                campground: ynBool(apiLocation.CAMPGROUND),
+                dunes: ynBool(apiLocation.DUNES),
+                fishing: ynBool(apiLocation.FISHING),
+                boating: ynBool(apiLocation.BOATING),
+                photo1: apiLocation["Photo_1"],
+                photo2: apiLocation["Photo_2"],
+                photo3: apiLocation["Photo_3"],
+                photo4: apiLocation["Photo_4"]
+            },
+            
             location: {
                 type: "Point",
                 coordinates: [ apiLocation.LONGITUDE, apiLocation.LATITUDE ]
@@ -63,6 +85,15 @@ const searchName = async (query) => {
     return await Beach.find({$text: {$search: query}}).limit(10).exec();
 }
 
+const getInfo = async (id) => {
+    return await Beach.findById(id).select("+details").exec();
+}
+
+function ynBool(yn) {
+    return yn === "Yes";
+}
+
 exports.updateLocations = updateLocations;
 exports.findNearest = findNearest;
 exports.searchName = searchName;
+exports.getInfo = getInfo;

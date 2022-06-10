@@ -10,7 +10,12 @@ exports.geoFind = async (req, res) => {
 
 exports.nameSearch = async (req, res) => {
     const query = req.params.query;
-
     const searchResult = await dbservice.searchName(query);
+    res.send(searchResult);
+}
+
+exports.getInfo = async (req, res) => {
+    const id = req.params.id;
+    const searchResult = await dbservice.getInfo(id);
     res.send(searchResult);
 }

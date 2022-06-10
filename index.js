@@ -32,3 +32,4 @@ main().catch(err => console.error(err));
 
 app.post("/find/geo/:latitude/:longitude", beaches.geoFind);
 app.post("/find/name/:query", beaches.nameSearch);
+app.post("/info/:id", beaches.getInfo)
