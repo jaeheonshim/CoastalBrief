@@ -60,6 +60,8 @@ app.get("/login", (req, res) => {
     res.render("pages/login");
 });
 
+app.get("/", (req, res) => res.render("pages/index"));
+
 /* PASSPORT OAUTH */
 
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_OAUTH_ID;
@@ -98,4 +100,5 @@ app.get("/auth/google/callback",
     { failureRedirect: "/error"}),
     function(req, res) {
         res.redirect("/session");
-    });
+    }
+);
