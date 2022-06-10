@@ -14,16 +14,21 @@ const updateLocations = async () => {
         const dbLocation = new Beach({
             _id: id,
             name: apiLocation.NameMobileWeb,
-            latitude: apiLocation.LATITUDE,
-            longitude: apiLocation.LONGITUDE
+            location: {
+                type: "Point",
+                coordinates: [ apiLocation.LONGITUDE, apiLocation.LATITUDE ]
+            }
         });
 
+        const upsertData = dbLocation.toObject();
+        delete upsertData._id;
+
         try {
-            if(await Beach.exists({_id: id})) {
-                promises.push(dbLocation.updateOne({ _id: id }));
-            } else {
-                promises.push(dbLocation.save());
-            }
+            promises.push(Beach.updateOne(
+                { _id: id},
+                upsertData,
+                { upsert: true },
+            ));
         } catch(error) {
             console.error(error);
         }
@@ -36,4 +41,21 @@ const updateLocations = async () => {
     });
 }
 
+const findNearest = async (latitude, longitude) => {
+    Beach.find({
+        location: {
+            $near: {
+                $geometry: {
+                    type: "Point",
+                    coordinates: [ longitude, latitude ]
+                }
+            }
+        }
+    }).limit(5).find((error, results) => {
+        if(error) console.error(error);
+        console.log(results);
+    });
+}
+
 exports.updateLocations = updateLocations;
+exports.findNearest = findNearest;

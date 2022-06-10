@@ -17,7 +17,6 @@ async function main() {
     });
 
     scheduleCron();
-    dbservice.updateLocations();
 }
 
 function scheduleCron() {
