@@ -6,6 +6,9 @@ const cron = require("node-cron")
 
 const dbservice = require("./services/dbservice");
 
+// ROUTES
+const beaches = require("./routes/beaches")
+
 const port = process.env.PORT || 8080;
 const app = express();
 
@@ -26,3 +29,5 @@ function scheduleCron() {
 }
 
 main().catch(err => console.error(err));
+
+app.post("/find/geo/:latitude/:longitude", beaches.geoFind);

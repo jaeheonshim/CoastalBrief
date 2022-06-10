@@ -41,19 +41,21 @@ const updateLocations = async () => {
     });
 }
 
-const findNearest = async (latitude, longitude) => {
-    Beach.find({
-        location: {
-            $near: {
-                $geometry: {
-                    type: "Point",
-                    coordinates: [ longitude, latitude ]
+const findNearest = (latitude, longitude) => {
+    return new Promise((resolve) => {
+        Beach.find({
+            location: {
+                $near: {
+                    $geometry: {
+                        type: "Point",
+                        coordinates: [ longitude, latitude ]
+                    }
                 }
             }
-        }
-    }).limit(5).find((error, results) => {
-        if(error) console.error(error);
-        console.log(results);
+        }).limit(10).find((error, results) => {
+            if(error) console.error(error);
+            else resolve(results);
+        });
     });
 }
 
