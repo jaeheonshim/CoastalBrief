@@ -17,6 +17,11 @@ const weather = require("./routes/weather");
 const port = process.env.PORT || 8080;
 const app = express();
 
+app.set("views", __dirname + "/views");
+app.set("view engine", "ejs");
+
+app.use(express.static(__dirname + "/public"));
+
 app.use(session({
     resave: false,
     saveUninitialized: true,
@@ -51,13 +56,16 @@ app.get("/session", function(req, res) {
     res.send(req.session);
 });
 
+app.get("/login", (req, res) => {
+    res.render("pages/login");
+});
+
 /* PASSPORT OAUTH */
 
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_OAUTH_ID;
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_OAUTH_SECRET;
 
 const passport = require("passport");
-let userProfile;
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -80,8 +88,7 @@ passport.use(new GoogleStrategy({
     callbackURL: "http://localhost:8080/auth/google/callback"
     },
     function(accessToken, refreshToken, profile, done) {
-        userProfile = profile;
-        return done(null, userProfile);
+        return done(null, profile);
     }
 ));
 
