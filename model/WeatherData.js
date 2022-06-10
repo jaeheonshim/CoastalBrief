@@ -28,7 +28,7 @@ const weatherSchema = new mongoose.Schema({
     },
     dt: Number,
     sys: {
-        type: Number,
+        type: { type: Number },
         id: Number,
         country: String,
         sunrise: Number,

@@ -7,7 +7,8 @@ const cron = require("node-cron")
 const dbservice = require("./services/dbservice");
 
 // ROUTES
-const beaches = require("./routes/beaches")
+const beaches = require("./routes/beaches");
+const weather = require("./routes/weather");
 
 const port = process.env.PORT || 8080;
 const app = express();
@@ -32,4 +33,6 @@ main().catch(err => console.error(err));
 
 app.post("/find/geo/:latitude/:longitude", beaches.geoFind);
 app.post("/find/name/:query", beaches.nameSearch);
-app.post("/info/:id", beaches.getInfo)
+app.post("/info/:id", beaches.getInfo);
+
+app.post("/weather/:id", weather.getWeather);

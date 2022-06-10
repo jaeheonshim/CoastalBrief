@@ -12,22 +12,22 @@ const maxHistorical = 10 * 60
  */
 const getBeachWeather = async (beachId) => {
     const historicalData = await WeatherData.findOne({ beachId: beachId }).exec();
+    const beach = await Beach.findById(beachId).exec();
+    const location = beach.location.coordinates;
+
+    if(!beach) {
+        throw "Beach not found!";
+    }
 
     if(!historicalData) {
-        const beach = await Beach.findById(beachId).exec();
-        const location = beach.location;
-
-        const recentData = await getWeatherModelGeo(location[1], location[0]);
+        const recentData = await getWeatherModelGeo(beachId, location[1], location[0]);
         const weatherData = new WeatherData(recentData);
 
         weatherData.save();
         
         return recentData;
     } else if((new Date().getTime() - historicalData.updatedAt.getTime()) > maxHistorical) {
-        const beach = await Beach.findById(beachId).exec();
-        const location = beach.location;
-
-        const recentData = await getWeatherModelGeo(location[1], location[0]);
+        const recentData = await getWeatherModelGeo(beachId, location[1], location[0]);
         WeatherData.updateOne({ _id: historicalData._id }, recentData);
 
         return recentData;
@@ -39,14 +39,11 @@ const getBeachWeather = async (beachId) => {
 /**
  * Gets the weather data model for a certain set of coordinates
  */
-const getWeatherModelGeo = async (latitude, longitude) => {
-    // const beach = await Beach.findById(beachId).exec();
-    // const location = beach.location;
-
-    const apiData = await weatherapi.getWeatherGeo(longitude, latitude);
+const getWeatherModelGeo = async (beachId, latitude, longitude) => {
+    const apiData = await weatherapi.getWeatherGeo(latitude, longitude);
 
     return {
-        beachId: beach._id,
+        beachId: beachId,
         coord: apiData.coord,
         weather: apiData.weather[0],
         base: apiData.base,
