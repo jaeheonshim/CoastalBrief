@@ -38,6 +38,8 @@ const weatherSchema = new mongoose.Schema({
     id: Number,
     name: String,
     cod: Number
+}, {
+    timestamps: true
 });
 
 const WeatherData = mongoose.model("WeatherData", weatherSchema);

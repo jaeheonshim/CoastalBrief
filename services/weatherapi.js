@@ -11,3 +11,5 @@ const getWeatherGeo = async (latitude, longitude) => {
         console.error(error);
     }
 }
+
+exports.getWeatherGeo = getWeatherGeo;
