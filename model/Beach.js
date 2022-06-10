@@ -9,7 +9,7 @@ const beachSchema = new mongoose.Schema({
     }
 });
 
-beachSchema.index({ location: "2dsphere" });
+beachSchema.index({ location: "2dsphere", name: "text" });
 
 const Beach = mongoose.model("Beach", beachSchema);
 

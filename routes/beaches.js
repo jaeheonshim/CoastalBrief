@@ -7,3 +7,10 @@ exports.geoFind = async (req, res) => {
     const searchResult = await dbservice.findNearest(latitude, longitude);
     res.send(searchResult);
 }
+
+exports.nameSearch = async (req, res) => {
+    const query = req.params.query;
+
+    const searchResult = await dbservice.searchName(query);
+    res.send(searchResult);
+}

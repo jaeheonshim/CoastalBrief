@@ -59,5 +59,10 @@ const findNearest = (latitude, longitude) => {
     });
 }
 
+const searchName = async (query) => {
+    return await Beach.find({$text: {$search: query}}).limit(10).exec();
+}
+
 exports.updateLocations = updateLocations;
 exports.findNearest = findNearest;
+exports.searchName = searchName;
