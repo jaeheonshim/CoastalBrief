@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CoastalHacks</title>
+  <link rel="stylesheet" href="/css/index.css">
+  <link href="https://unpkg.com/tailwindcss@^2.0/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+</head>
+
+<body class="static">
+  <section>
+    <div class="container py-12 mt-10 mx-auto">
+      <div class="flex justify-center items-center flex-wrap g-6 text-gray-800">
+        <div class="xl:w-10/12">
+          <div class="block bg-white shadow-lg rounded-lg">
+            <div class="lg:flex lg:flex-wrap g-0 px-8 py-6">
+              <h1 class="text-3xl font-medium">Welcome<%- locals.displayName ? `, <b>${displayName}</b>!` : "!" %> <%= greeting %></h1>
+              <br>
+              <p class="text-lg mt-3">Let's find the perfect coastal location for you. Follow the simple instructions below:</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="container mt-1 mx-auto">
+      <div class="justify-center items-center flex-wrap text-gray-800">
+        <div class="xl:w-10/12 mx-auto">
+          <div class="block bg-white shadow-lg rounded-lg">
+            <div class="px-8 py-6">
+              <h1 class="text-2xl font-semibold">Step 1: How would you like to find your beach?</h1>
+              <hr>
+              <div class="mt-4 content-center flex">
+                <button type="button" class="btn btn-outline-primary btn-lg w-100">Search by location</button>
+                <button type="button" class="ml-2 btn btn-outline-primary btn-lg w-100">Search by name</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+
+</html>

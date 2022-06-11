@@ -9,6 +9,7 @@ const session = require("express-session");
 
 // SERVICES
 const dbservice = require("./services/dbservice");
+const randomgreeting = require("./util/randomgreeting");
 
 // ROUTES
 const beaches = require("./routes/beaches");
@@ -56,11 +57,16 @@ app.get("/session", function(req, res) {
     res.send(req.session);
 });
 
-app.get("/login", (req, res) => {
-    res.render("pages/login");
-});
-
 app.get("/", (req, res) => res.render("pages/index"));
+
+app.get("/find", (req, res) => {
+    if(req.session.passport) {
+        const displayName = req.session.passport.user.displayName;
+        res.render("pages/find", {displayName: displayName, greeting: randomgreeting()});
+    } else {
+        res.render("pages/find", {greeting: randomgreeting()});
+    }
+})
 
 /* PASSPORT OAUTH */
 
@@ -99,6 +105,6 @@ app.get("/auth/google/callback",
     passport.authenticate("google", 
     { failureRedirect: "/error"}),
     function(req, res) {
-        res.redirect("/session");
+        res.redirect("/find");
     }
 );
