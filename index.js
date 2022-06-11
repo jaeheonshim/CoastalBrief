@@ -72,6 +72,13 @@ app.get("/session", function(req, res) {
     res.send(req.session);
 });
 
+app.get("/logout", function(req, res) {
+    req.session.destroy(function(err) {
+        if(err) console.error(err);
+        res.redirect("/");
+    });
+});
+
 app.get("/", (req, res) => res.render("pages/index"));
 
 app.get("/find", (req, res) => {
