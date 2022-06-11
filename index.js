@@ -29,6 +29,21 @@ app.use(session({
     secret: "SECRET"
 }));
 
+app.use((req, res, next) => {
+    if(req.session.passport) {
+        const displayName = req.session.passport.user.displayName;
+        const photos = req.session.passport.user.photos;
+        
+        if(photos.length > 0) {
+            res.locals.profilePhoto = photos[0].value;
+        }
+
+        res.locals.displayName = displayName;
+    }
+
+    next();
+});
+
 async function main() {
     await mongoose.connect(process.env.MONGODB_ATLAS);
 
@@ -61,8 +76,7 @@ app.get("/", (req, res) => res.render("pages/index"));
 
 app.get("/find", (req, res) => {
     if(req.session.passport) {
-        const displayName = req.session.passport.user.displayName;
-        res.render("pages/find", {displayName: displayName, greeting: randomgreeting()});
+        res.render("pages/find", {greeting: randomgreeting()});
     } else {
         res.render("pages/find", {greeting: randomgreeting()});
     }

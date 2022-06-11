@@ -67,6 +67,7 @@
             API.searchByLocation(location.coords.latitude, location.coords.longitude).then(data => {
                 setLocationProgress(100);
                 populateData(data);
+                locationLoading.hide();
             });
         }, (error) => {
             alert("Sorry, but there was an error retrieving your location. Please reload and try again.");
