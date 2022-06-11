@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body class="static">
@@ -19,16 +20,16 @@
       <div class="flex justify-center items-center flex-wrap g-6 text-gray-800">
         <div class="xl:w-10/12">
           <div class="block bg-white shadow-lg rounded-lg">
-            <div class="lg:flex lg:flex-wrap g-0 px-8 py-6">
-              <h1 class="text-3xl font-medium">Welcome<%- locals.displayName ? `, <b>${displayName}</b>!` : "!" %> <%= greeting %></h1>
-              <br>
-              <p class="text-lg mt-3">Let's find the perfect coastal location for you. Follow the simple instructions below:</p>
+            <div class="px-8 py-6 pb-2">
+              <h1 class="text-3xl font-medium">Welcome<%- locals.displayName ? `, <b>${displayName}</b>!` : "!" %> <%- greeting %></h1>
+              <p class="text-lg">Let's find the perfect coastal location for you. Follow the simple instructions below:</p>
             </div>
           </div>
         </div>
       </div>
     </div>
   </section>
+  <!-- STEP 1 -->
   <section>
     <div class="container mt-1 mx-auto">
       <div class="justify-center items-center flex-wrap text-gray-800">
@@ -38,8 +39,8 @@
               <h1 class="text-2xl font-semibold">Step 1: How would you like to find your beach?</h1>
               <hr>
               <div class="mt-4 content-center flex">
-                <button type="button" class="btn btn-outline-primary btn-lg w-100">Search by location</button>
-                <button type="button" class="ml-2 btn btn-outline-primary btn-lg w-100">Search by name</button>
+                <button id="search_location_btn" type="button" class="btn btn-outline-primary btn-lg w-100">Search by location</button>
+                <button id="search_name_btn" type="button" class="ml-2 btn btn-outline-primary btn-lg w-100">Search by name</button>
               </div>
             </div>
           </div>
@@ -47,6 +48,65 @@
       </div>
     </div>
   </section>
+
+  <!-- STEP 2a: Search by location -->
+  <section>
+    <div class="container mt-8 mx-auto">
+      <div class="justify-center items-center flex-wrap text-gray-800">
+        <div class="xl:w-10/12 mx-auto">
+          <div class="block bg-white shadow-lg rounded-lg">
+            <div class="px-8 py-6">
+              <h1 class="text-2xl font-semibold">Step 2: Locate beach</h1>
+              <hr>
+              <div class="mt-4 content-center">
+                <p>Press the button below to use your location to find beaches near you.</p>
+                <button id="enable_location_btn" type="button" class="btn btn-primary btn-lg w-100">Enable location</button>
+                <div class="form-text">Your location will never be shared with anyone else - we don't store location on our servers.</div>
+                <div id="location_loading" class="hidden mt-3">
+                Please wait...
+                <div class="progress">
+                <div id="location_bar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <!-- STEP 3 -->
+    <section>
+        <div class="container mt-8 mx-auto">
+          <div class="justify-center items-center flex-wrap text-gray-800">
+            <div class="xl:w-10/12 mx-auto">
+              <div class="block bg-white shadow-lg rounded-lg">
+                <div class="px-8 py-6">
+                  <h1 class="text-2xl font-semibold">Step 3: Choose beach</h1>
+                  <hr>
+                  <div class="mt-4 content-center">
+                    <table id="data_table" class="table table-striped">
+                        <thead>
+                            <tr>
+                              <th scope="col">Name</th>
+                              <th scope="col">Description</th>
+                              <th scope="col">Distance (km)</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                          </tbody>                        
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/find.js"></script>
 </body>
 
 </html>
