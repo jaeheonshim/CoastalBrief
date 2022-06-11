@@ -10,8 +10,6 @@
   <link href="/css/fa/all.min.css" rel="stylesheet">
   <link href="/css/info.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <style>
     body {
@@ -68,6 +66,44 @@
       </div>
     </div>
   </section>
+
+  <section>
+    <div class="container mt-10 mx-auto mb-5">
+      <div class="flex justify-center items-center flex-wrap g-6 text-gray-800">
+        <div class="xl:w-11/12">
+          <div class="block bg-white shadow-lg rounded-lg p-3">
+            <h2 class="text-4xl font-semibold mb-1">Leave a review</h2>
+            <hr>
+            <% if(locals.displayName) { %>
+            <%- include("../partials/reviewform") %>
+            <% } else { %>
+            <p class="mb-2 mt-2">You must sign in to leave a review.</p>
+            <a class="google-login px-7 py-3 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full flex justify-center items-center mb-3" style="background-color: 	#DB4437" href="/login?redirect=" role="button" data-mdb-ripple="true" data-mdb-ripple-color="light">
+              <p><i class="fa-brands fa-google"></i>
+                <p style="color:#DB4437;">h</p> Continue with GOOGLE
+              </p>
+            </a>
+            <script>
+              $(".google-login").attr("href", `/auth/google?redirect=${window.location.href}`);
+            </script>
+            <a class="px-7 py-3 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full flex justify-center items-center mb-3" style="background-color: #3b5998" href="#!" role="button" data-mdb-ripple="true" data-mdb-ripple-color="light">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="w-3.5 h-3.5 mr-2">
+                <path fill="currentColor" d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z" />
+              </svg>Continue with Facebook
+            </a>
+            <a class="px-7 py-3 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full flex justify-center items-center" style="background-color: #55acee" href="#!" role="button" data-mdb-ripple="true" data-mdb-ripple-color="light">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-3.5 h-3.5 mr-2">
+               fill="currentColor"
+                d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"
+                /></svg>Continue with Twitter
+            </a>
+            <% } %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
 
   <%- include("../partials/profile") %>
   <script src="/js/api.js"></script>

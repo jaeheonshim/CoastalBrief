@@ -15,6 +15,7 @@ const randomgreeting = require("./util/randomgreeting");
 // ROUTES
 const beaches = require("./routes/beaches");
 const weather = require("./routes/weather");
+const reviews = require("./routes/reviews");
 
 const port = process.env.PORT || 8080;
 const app = express();
@@ -70,6 +71,8 @@ main().catch(err => console.error(err));
 app.post("/find/geo/:latitude/:longitude", beaches.geoFind);
 app.post("/find/name/:query", beaches.nameSearch);
 app.post("/info/:id", beaches.getInfo);
+
+app.post("/review/:beachId/new", reviews.newReview)
 
 app.post("/weather/:id", weather.getWeather);
 
@@ -134,11 +137,16 @@ passport.use(new GoogleStrategy({
     }
 ));
 
-app.get("/auth/google", passport.authenticate("google", { scope: ["profile"]}));
+app.get("/auth/google", (req, res, next) => {
+    const authenticator = passport.authenticate("google", { scope: ["profile"], state: req.query.redirect})
+    authenticator(req, res, next);
+});
+
 app.get("/auth/google/callback", 
     passport.authenticate("google", 
     { failureRedirect: "/error"}),
     function(req, res) {
-        res.redirect("/find");
+        res.redirect(req.query.state || "/find");
+        req.query.state = null;
     }
 );

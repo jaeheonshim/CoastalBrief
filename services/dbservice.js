@@ -89,6 +89,10 @@ const getInfo = async (id) => {
     return await Beach.findById(id).select("+details").exec();
 }
 
+const exists = async (id) => {
+    return await Beach.exists({_id: id});
+}
+
 function ynBool(yn) {
     return yn === "Yes";
 }
@@ -97,3 +101,4 @@ exports.updateLocations = updateLocations;
 exports.findNearest = findNearest;
 exports.searchName = searchName;
 exports.getInfo = getInfo;
+exports.exists = exists;
