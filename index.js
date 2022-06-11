@@ -9,6 +9,7 @@ const session = require("express-session");
 
 // SERVICES
 const dbservice = require("./services/dbservice");
+const weatherService = require("./services/weatherservice");
 const randomgreeting = require("./util/randomgreeting");
 
 // ROUTES
@@ -87,7 +88,9 @@ app.get("/find", (req, res) => {
 
 app.get("/info/:id", async (req, res) => {
     const beachInfo = await dbservice.getInfo(req.params.id);
-    res.render("pages/info", {info: beachInfo});
+    const weatherData = await weatherService.getBeachWeather(req.params.id);
+
+    res.render("pages/info", {info: beachInfo, weather: weatherData});
 });
 
 /* PASSPORT OAUTH */
