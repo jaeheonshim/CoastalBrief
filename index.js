@@ -90,7 +90,7 @@ app.get("/info/:id", async (req, res) => {
     const beachInfo = await dbservice.getInfo(req.params.id);
     const weatherData = await weatherService.getBeachWeather(req.params.id);
 
-    res.render("pages/info", {info: beachInfo, weather: weatherData});
+    res.render("pages/info", {info: beachInfo, weather: weatherData, MAPS_API_KEY: process.env.GOOGLE_MAPS_KEY });
 });
 
 /* PASSPORT OAUTH */
