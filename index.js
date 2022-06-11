@@ -45,6 +45,10 @@ app.use((req, res, next) => {
     next();
 });
 
+app.locals.kToF = (K) => {
+    return Math.round((K - 273.15) * 9/5 + 32);
+};
+
 async function main() {
     await mongoose.connect(process.env.MONGODB_ATLAS);
 
