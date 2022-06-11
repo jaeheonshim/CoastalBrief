@@ -92,6 +92,11 @@ app.get("/find", (req, res) => {
 
 app.get("/info/:id", async (req, res) => {
     const beachInfo = await dbservice.getInfo(req.params.id);
+    if(!beachInfo) {
+        res.status(404).send("Not Found");
+        return;
+    }
+
     const weatherData = await weatherService.getBeachWeather(req.params.id);
 
     res.render("pages/info", {info: beachInfo, weather: weatherData, MAPS_API_KEY: process.env.GOOGLE_MAPS_KEY });

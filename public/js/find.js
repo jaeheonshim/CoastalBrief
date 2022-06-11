@@ -30,6 +30,12 @@
             const distance = document.createElement("td");
             distance.innerText = dataRow.distance;
             row.appendChild(distance);
+
+            row.style.cursor = "pointer";
+
+            row.addEventListener("click", () => {
+                window.location.href = "/info/" + dataRow._id;
+            });
         }
     }
     
