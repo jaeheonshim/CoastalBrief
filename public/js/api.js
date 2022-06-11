@@ -14,6 +14,24 @@ const API = (function () {
         });
     }
 
+    const submitReview = (rating, content) => {
+        const id = apiInfo._id;
+        return new Promise((resolve) => {
+            $.ajax({
+                url: `${endpoint}/review/${id}/new`,
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify({
+                    rating: rating,
+                    content: content
+                }),
+                success: function(response) {
+                    console.log(response);
+                }
+            });
+        })
+    }
+
     function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
         var R = 6371; // Radius of the earth in km
         var dLat = deg2rad(lat2 - lat1);  // deg2rad below
@@ -34,6 +52,7 @@ const API = (function () {
 
     return {
         searchByLocation: searchByLocation,
-        getDistanceFromLatLonInKm: getDistanceFromLatLonInKm
+        getDistanceFromLatLonInKm: getDistanceFromLatLonInKm,
+        submitReview: submitReview
     }
 })();

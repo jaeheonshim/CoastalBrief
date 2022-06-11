@@ -26,8 +26,10 @@ exports.newReview = async (req, res) => {
     const displayName = req.session.passport.user.displayName;
     const picture = req.session.passport.user.photos[0].value;
 
-    const rating = parseInt(body.rating);
-    const content = stripJs(body.content);
+    console.log(req.body);
+
+    const rating = parseInt(req.body.rating);
+    const content = stripJs(req.body.content);
 
     const newReview = new Review({
         userId: userId,
@@ -39,5 +41,5 @@ exports.newReview = async (req, res) => {
 
     await newReview.save();
 
-    res.status(200).send();
+    res.status(200).send("Success!");
 }
