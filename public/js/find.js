@@ -9,6 +9,9 @@
 
     const dataTable = $("#data_table");
 
+    const step2 = $("#step2");
+    const step3 = $("#step3");
+
     function populateData(data) {
         $("#data_table tbody tr").remove();
         const table = dataTable.get(0);
@@ -50,6 +53,8 @@
     searchLoc.click(() => {
         setBtnSelected(searchLoc, true);
         setBtnSelected(searchName, false);
+        step2.show();
+        goToByScroll("step2");
     });
 
     searchName.click(() => {
@@ -68,10 +73,18 @@
                 setLocationProgress(100);
                 populateData(data);
                 locationLoading.hide();
+                step3.show();
+                goToByScroll("step3");
             });
         }, (error) => {
             alert("Sorry, but there was an error retrieving your location. Please reload and try again.");
             console.error("Error retrieving location");
         });
     });
+
+    function goToByScroll(id) {
+        $('html,body').animate({
+            scrollTop: $("#" + id).offset().top
+        }, 'slow');
+    }
 })();

@@ -82,12 +82,13 @@ app.get("/logout", function(req, res) {
 app.get("/", (req, res) => res.render("pages/index"));
 
 app.get("/find", (req, res) => {
-    if(req.session.passport) {
-        res.render("pages/find", {greeting: randomgreeting()});
-    } else {
-        res.render("pages/find", {greeting: randomgreeting()});
-    }
-})
+    res.render("pages/find", {greeting: randomgreeting()});
+});
+
+app.get("/info/:id", async (req, res) => {
+    const beachInfo = await dbservice.getInfo(req.params.id);
+    res.render("pages/info", {info: beachInfo});
+});
 
 /* PASSPORT OAUTH */
 

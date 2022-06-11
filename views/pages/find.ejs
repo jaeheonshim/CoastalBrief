@@ -50,7 +50,7 @@
   </section>
 
   <!-- STEP 2a: Search by location -->
-  <section>
+  <section id="step2" class="hidden">
     <div class="container mt-8 mx-auto">
       <div class="justify-center items-center flex-wrap text-gray-800">
         <div class="xl:w-10/12 mx-auto">
@@ -77,7 +77,7 @@
   </section>
 
   <!-- STEP 3 -->
-  <section>
+  <section id="step3" class="hidden">
     <div class="container mt-8 mb-4 mx-auto">
       <div class="justify-center items-center flex-wrap text-gray-800">
         <div class="xl:w-10/12 mx-auto">
@@ -85,12 +85,13 @@
             <div class="px-8 py-6">
               <h1 class="text-2xl font-semibold">Step 3: Choose beach</h1>
               <hr>
-              <div class="mt-4 content-center">
+              <p>Below are some beaches near your location. Click on any beach to view more details.</p>
+              <div class="content-center">
                 <table id="data_table" class="table table-striped">
                   <thead>
                     <tr>
                       <th scope="col">Name</th>
-                      <th scope="col">Description</th>
+                      <th scope="col">Note</th>
                       <th scope="col">Distance (km)</th>
                     </tr>
                   </thead>

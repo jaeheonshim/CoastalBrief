@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CoastalHacks</title>
+  <link href="https://unpkg.com/tailwindcss@^2.0/dist/tailwind.min.css" rel="stylesheet">
+  <link href="/css/fa/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    body {
+      background-image: url("<%= info.details.photo1 %>");
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+  </style>
+</head>
+
+<body>
+  <section>
+    <div class="container py-12 mt-14 mx-auto">
+      <div class="flex justify-center items-center flex-wrap g-6 text-gray-800">
+        <div class="xl:w-10/12">
+          <div class="block bg-white shadow-lg rounded-lg">
+            <div class="px-8 py-6">
+              <p class="text-3xl font-semibold mb-0"><%= info.name %></p>
+              <small class="font-semibold"><%= info.county %></small>
+              <p class="text-md mt-2"><%= info.description %></p>
+              <div class="text-2xl flex gap-x-4">
+                <% if(info.details.fee) { %> <i data-toggle="tooltip" title="Fee" class="fa-solid fa-dollar-sign"> <% } %></i>
+                <% if(info.details.parking) { %> <i data-toggle="tooltip" title="Parking" class="fa-solid fa-square-parking"> <% } %></i>
+                <% if(info.details.disabled_access) { %> <i data-toggle="tooltip" title="Accessible" class="fa-brands fa-accessible-icon"> <% } %></i>
+                <% if(info.details.restrooms) { %> <i data-toggle="tooltip" title="Restrooms" class="fa-solid fa-restroom"> <% } %></i>
+                <% if(info.details.dog_friendly) { %> <i data-toggle="tooltip" title="Pet Friendly" class="fa-solid fa-dog"> <% } %></i>
+                <% if(info.details.picnic_area) { %> <i data-toggle="tooltip" title="Picnic" class="fa-solid fa-utensils"> <% } %></i>
+                <% if(info.details.campground) { %> <i data-toggle="tooltip" title="Campgrounds" class="fa-solid fa-campground"> <% } %></i>
+                <% if(info.details.dunes) { %> <i data-toggle="tooltip" title="Dunes" class="fa-solid fa-mound"> <% } %></i>
+                <% if(info.details.fishing) { %> <i data-toggle="tooltip" title="Fishing" class="fa-solid fa-fish"> <% } %></i>
+                <% if(info.details.boating) { %> <i data-toggle="tooltip" title="Boating" class="fa-solid fa-sailboat"> <% } %></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <%- include("../partials/profile") %>
+  <script src="/js/api.js"></script>
+  <script src="/js/info.js"></script>
+</body>
+
+</html>
