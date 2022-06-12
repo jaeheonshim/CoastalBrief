@@ -56,7 +56,7 @@ async function main() {
     await mongoose.connect(process.env.MONGODB_ATLAS);
 
     app.listen(port, () => {
-        console.log(`CoastalHacks app running on port ${port}!`);
+        console.log(`CoastalBrief app running on port ${port}!`);
     });
 
     scheduleCron();
