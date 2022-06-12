@@ -26,8 +26,6 @@ exports.newReview = async (req, res) => {
     const displayName = req.session.passport.user.displayName;
     const picture = req.session.passport.user.photos[0].value;
 
-    console.log(req.body);
-
     const rating = parseInt(req.body.rating);
     const content = stripJs(req.body.content);
 

@@ -19,4 +19,12 @@
     }
 
     window.initMap = initMap;
+
+    const reviewForm = $("#review_form");
+    const reviewContent = document.getElementById("editor");
+
+    reviewForm.submit(function(event) {
+        event.preventDefault();
+        API.submitReview(5, reviewContent.value);
+    });
 })();
