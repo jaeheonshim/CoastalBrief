@@ -1,5 +1,6 @@
 const dbservice = require("../services/dbservice");
 const weatherService = require("../services/weatherservice");
+const placesAPI = require("../services/placesapi");
 
 const Review = require("../model/Review");
 const SupplementalInfo = require("../model/SupplementalInfo");
@@ -22,6 +23,14 @@ exports.getInfo = async (req, res) => {
     }
 
     const reviews = await Review.find({beachId: beachInfo._id}).sort({"createdAt": "desc"});
+    let nearbyPlaces = await placesAPI.getNearbyPlaces(beachInfo.location.coordinates[1], beachInfo.location.coordinates[0]);
+    nearbyPlaces = nearbyPlaces.filter(place => place.business_status == "OPERATIONAL").slice(0, 7);
 
-    res.render("pages/info", {info: beachInfo, weather: weatherData, MAPS_API_KEY: process.env.GOOGLE_MAPS_KEY, userReview: userReview, reviews: reviews, supplemental: supplementalInfo });
+    for(const place of nearbyPlaces) {
+        const details = await placesAPI.getPlaceDetails(place.place_id);
+
+        place.details = details;
+    }
+
+    res.render("pages/info", {info: beachInfo, nearbyPlaces: nearbyPlaces, weather: weatherData, MAPS_API_KEY: process.env.GOOGLE_MAPS_KEY, userReview: userReview, reviews: reviews, supplemental: supplementalInfo });
 }

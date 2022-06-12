@@ -1,0 +1,10 @@
+<div class="flex gap-x-6 border-b-2 mt-2 pb-2 items-start">
+    <div>
+        <img style="width: 50px" src="<%= place.icon %>">
+    </div>
+    <div>
+        <a href="<%= place.details.url %>"><b class="text-lg"><%= place.name %></b></a>
+        <br>
+        <%- place.details.adr_address %>
+    </div>
+</div>

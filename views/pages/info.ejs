@@ -59,6 +59,21 @@
   </section>
 
   <%- include("../partials/weather") %>
+  
+  <section>
+    <div class="container mt-10 mx-auto mb-5">
+      <div class="flex justify-center items-center flex-wrap g-6 text-gray-800">
+        <div class="xl:w-11/12">
+          <div class="block bg-white shadow-lg rounded-lg p-4">
+            <h2 class="text-4xl font-semibold mb-1">Nearby Places</h2>
+            <% for(const place of locals.nearbyPlaces) { %>
+            <%- include("../partials/nearbyplace", {place}); %>
+            <% } %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <section>
     <div class="container mt-10 mx-auto mb-5">
