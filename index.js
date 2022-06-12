@@ -75,6 +75,7 @@ app.post("/find/name/:query", beaches.nameSearch);
 app.post("/info/:id", beaches.getInfo);
 
 app.post("/review/:beachId/new", reviews.newReview)
+app.post("/review/:beachId/delete", reviews.deleteReview)
 
 app.post("/weather/:id", weather.getWeather);
 

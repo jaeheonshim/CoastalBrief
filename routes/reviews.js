@@ -41,3 +41,26 @@ exports.newReview = async (req, res) => {
 
     res.status(200).send("Success!");
 }
+
+exports.deleteReview = async (req, res) => {
+    if(!req.session.passport) {
+        res.status(401).send("Unauthorized");
+        return;
+    }
+
+    const beachId = req.params.beachId;
+    if(!(await dbservice.exists(beachId))) {
+        res.status(404).send("Beach not found");
+        return;
+    }
+
+    
+    const userId = req.session.passport.user.id;
+    const review = await Review.findOneAndDelete({userId: userId}).exec();
+
+    if(review) {
+        res.status(200).send("Review successfully deleted");
+    } else {
+        res.status(404).send("Review does not exist");
+    }
+}

@@ -31,6 +31,18 @@ const API = (function () {
         })
     }
 
+    const deleteReview = () => {
+        const id = apiInfo._id;
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                url: `${endpoint}/review/${id}/delete`,
+                type: "POST",
+                success: resolve,
+                error: reject
+            });
+        })
+    }
+
     function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
         var R = 6371; // Radius of the earth in km
         var dLat = deg2rad(lat2 - lat1);  // deg2rad below
@@ -50,8 +62,9 @@ const API = (function () {
     }
 
     return {
-        searchByLocation: searchByLocation,
-        getDistanceFromLatLonInKm: getDistanceFromLatLonInKm,
-        submitReview: submitReview
+        searchByLocation,
+        getDistanceFromLatLonInKm,
+        submitReview,
+        deleteReview
     }
 })();
