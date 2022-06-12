@@ -26,7 +26,9 @@ const API = (function () {
                     content: content
                 }),
                 success: resolve,
-                error: reject
+                error: (data) => {
+                    reject(data.responseText);
+                }
             });
         })
     }
@@ -38,7 +40,9 @@ const API = (function () {
                 url: `${endpoint}/review/${id}/delete`,
                 type: "POST",
                 success: resolve,
-                error: reject
+                error: (data) => {
+                    reject(data.responseText);
+                }
             });
         })
     }

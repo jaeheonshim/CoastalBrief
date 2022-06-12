@@ -33,4 +33,12 @@
             reviewError.text(error.responseText);
         });
     });
+
+    $("#delete_review").click(() => {
+        API.deleteReview().then(() => {
+            location.reload();
+        }).catch((error) => {
+            alert(error);
+        });
+    });
 })();

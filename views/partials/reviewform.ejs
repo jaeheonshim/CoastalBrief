@@ -8,6 +8,7 @@
           <% if(locals.userReview) { %>
           <p>Your review:</p>
           <%- include("../partials/review", {review: userReview}) %>
+          <a id="delete_review" class="text-red-500">Delete Review</a>
           <% } else if(locals.displayName) { %>
           <div class="mx-auto mt-2">
             <p>Your name and profile picture will be publicly shared when you submit your review.</p>
