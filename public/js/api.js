@@ -1,4 +1,4 @@
-const endpoint = "/";
+const endpoint = "";
 
 const API = (function () {
     const searchByLocation = (latitude, longitude) => {

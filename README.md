@@ -1,4 +1,9 @@
 # CoastalBrief 🌊
+
+This project was submitted for [Coastal Hacks 2022](https://coastal-hacks.devpost.com/). Check out the [submission page](https://devpost.com/software/coastalbrief).
+
+---
+
 CoastalBrief is your one-stop hub for **planning beach vacation**. CoastalBrief helps you find the best beaches near you and provides helpful information on over 1000 beaches. Using the weather data it can also recommend which beach activities are a good choice depending on the current weather, humidity. We also have **easy to understand review system** for the users to rate their experience .The best part is that **all of these are available in one place** in a clean and intuitive interface.
 
 # Technology Stack Used:
