@@ -14,12 +14,33 @@ CoastalBrief is your one-stop hub for **planning beach vacation**. CoastalBrief 
 
 - EJS: For webpage templating
 - Axios: For making requests to external APIs
-- Mongoose: For querying MongoDB fromJavascript
+- Mongoose: For querying MongoDB from Javascript
 - Passport.js: Authentication middleware for Google OAuth
 
 #### APIs used
 - [California Coastal API](https://www.coastal.ca.gov/open-data/api-docs/)
 - [OpenWeatherMap](https://openweathermap.org)
+
+## What it does?
+This hackathon project is my attempt to gather data about beaches from all around the internet and display it one place. CoastalBrief includes details, amenities, weather, maps/direction to the particular beach, images and reviews all in one place, making it easy to find all of the information for a perfect vacation.
+
+CoastalBrief allows users to use their browser's geolocation to automatically find beaches near them from a database of 900+ California coastal locations. Once a beach is selected by the user, CoastalBrief provides numerous details:
+- Name, location and description of the beach
+- Details about the beach (fee, parking, campgrounds, picnic area, fishing, boating, etc.)
+- Weather information as well as activity advice based on weather
+- Precise Google Map on the location of the beach
+- User submitted reviews and feedback about the beach
+
+The background of each beach page is a picture taken from the beach itself!
+
+## How we built it ⚙️
+The real gem behind this project is the [California Coastal API](https://www.coastal.ca.gov/open-data/api-docs/). This API provides details on hundreds of beaches, making it possible for us to include custom details for so many beaches. Although this API only provides information about beaches in California, we hope to add beaches from around the world in the future.
+
+The data from the coastal API is queried by our server hourly, and saved into our MongoDB database (to avoid overloading their API). This database can be queried by name and location (latitude, longitude).
+
+Another big part of our project is weather. We use [OpenWeatherMap](https://openweathermap.org) to retrieve live weather data about a beach's geographical location. Weather data is retrieved on demand from the API and is cached into our MongoDB database (this is required as the API has tight rate limits). Our web application defines it's own API for retrieving weather location about a specific beach, and also provides advice on swimming/surfing based on temperature and wind speed.
+
+The last major part of our project are user reviews. We have our own simple in-house implementation for reviews. Users are identified by Google OAuth, and reviews are saved in our MongoDB database. Reviews are displayed on each beach information page. Users can access our website without logging in, but in order to leave reviews they must sign into their Google account. Once signed in, users have the option to leave reviews on any beach information page.
 
 ## Challenges we ran into 💻
 We overcame several challenges to bring this project to life. One of the main challenges that we have no control over is the pricing on the OpenWeatherMap API. In order to access historical and forecasted weather information, we were required to pay a fee to OpenWeatherMap, which we were unable to do. Therefore, we had to settle by only displaying current weather data on our website.
