@@ -5,7 +5,10 @@
         <div class="block bg-white shadow-lg rounded-lg p-3">
           <h2 class="text-4xl font-semibold mb-1">Leave a review</h2>
           <hr>
-          <% if(locals.displayName) { %>
+          <% if(locals.userReview) { %>
+          <p>Your review:</p>
+          <%- include("../partials/review", {review: userReview}) %>
+          <% } else if(locals.displayName) { %>
           <div class="mx-auto mt-2">
             <p>Your name and profile picture will be publicly shared when you submit your review.</p>
             <p id="review_error" class="text-red-600"></p>
