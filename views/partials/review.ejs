@@ -1,4 +1,19 @@
-<div>
-    <b><%= review.displayName %></b>
-    <p><%= review.content %></p>
+<div class="flex gap-x-6 border-b-2 mt-4 items-start">
+    <div class="mt-2">
+        <img class="rounded-full" style="width: 50px" src="<%= review.picture %>">
+    </div>
+    <div>
+        <b><%= review.displayName %></b>
+        <span>
+            <% for(let i = 0; i < review.rating; i++) { %>
+            <i class="fa-solid fa-star"></i>
+            <% } %>
+            <% for(let i = 0; i < 5 - review.rating; i++) { %>
+                <i class="fa-regular fa-star"></i>
+            <% } %>
+        </span>
+        <br>
+        <small><%= review.createdAt %></small>
+        <p class="mt-2"><%= review.content %></p>
+    </div>
 </div>

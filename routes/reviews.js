@@ -18,7 +18,7 @@ exports.newReview = async (req, res) => {
 
     
     const userId = req.session.passport.user.id;
-    if(await Review.exists({userId: userId})) {
+    if(await Review.exists({userId: userId, beachId: beachId})) {
         res.status(400).send("Review already exists");
         return;
     }
@@ -57,7 +57,7 @@ exports.deleteReview = async (req, res) => {
 
     
     const userId = req.session.passport.user.id;
-    const review = await Review.findOneAndDelete({userId: userId}).exec();
+    const review = await Review.findOneAndDelete({userId: userId, beachId: beachId}).exec();
 
     if(review) {
         res.status(200).send("Review successfully deleted");

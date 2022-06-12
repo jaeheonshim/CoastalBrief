@@ -15,7 +15,7 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <style>
     body {
-      background-image: url("<%= info.details.photo1 %>"), url("/img/beach.jpg");
+      background-image: url("<%= locals.supplemental ? supplemental.background : '' %>"), url("<%= info.details.photo1 %>"), url("/img/beach.jpg");
       ;
       background-repeat: no-repeat;
       background-size: cover;
@@ -35,7 +35,10 @@
             <div class="px-8 py-6">
               <p class="text-3xl font-semibold mb-0"><%= info.name %></p>
               <small class="font-semibold"><%= info.county %></small>
-              <p class="text-md mt-2"><%= info.description %></p>
+              <p class="text-md mt-2 mb-1.5"><%= info.description %></p>
+              <% if(locals.supplemental) { %>
+              <p class="text-md mt-0"><%= locals.supplemental.extendedDescription %></p>
+              <% } %>
               <div class="text-2xl flex gap-x-4">
                 <% if(info.details.fee) { %> <i data-toggle="tooltip" title="Fee" class="fa-solid fa-dollar-sign"> <% } %></i>
                 <% if(info.details.parking) { %> <i data-toggle="tooltip" title="Parking" class="fa-solid fa-square-parking"> <% } %></i>

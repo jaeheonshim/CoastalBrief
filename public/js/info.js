@@ -21,13 +21,19 @@
     window.initMap = initMap;
 
     const reviewForm = $("#review_form");
+    const getReviewRating = () => $("#new_review .rating input[name='stars']:checked").val();
     const reviewContent = document.getElementById("editor");
 
     const reviewError = $("#review_error");
 
     reviewForm.submit(function(event) {
         event.preventDefault();
-        API.submitReview(5, reviewContent.value).then((data) => {
+        if(!getReviewRating()) {
+            alert("Please give this review a rating!");
+            return;
+        }
+        
+        API.submitReview(getReviewRating(), reviewContent.value).then((data) => {
             location.reload(); 
         }).catch((error) => {
             reviewError.text(error.responseText);
