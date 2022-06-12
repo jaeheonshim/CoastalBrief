@@ -16,7 +16,7 @@ const API = (function () {
 
     const submitReview = (rating, content) => {
         const id = apiInfo._id;
-        return new Promise((resolve) => {
+        return new Promise((resolve, reject) => {
             $.ajax({
                 url: `${endpoint}/review/${id}/new`,
                 type: "POST",
@@ -25,12 +25,8 @@ const API = (function () {
                     rating: rating,
                     content: content
                 }),
-                success: function(response) {
-                    console.log(response);
-                },
-                error: function(error) {
-                    console.log(error);
-                }
+                success: resolve,
+                error: reject
             });
         })
     }

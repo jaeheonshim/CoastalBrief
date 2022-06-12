@@ -23,8 +23,14 @@
     const reviewForm = $("#review_form");
     const reviewContent = document.getElementById("editor");
 
+    const reviewError = $("#review_error");
+
     reviewForm.submit(function(event) {
         event.preventDefault();
-        API.submitReview(5, reviewContent.value);
+        API.submitReview(5, reviewContent.value).then((data) => {
+            location.reload(); 
+        }).catch((error) => {
+            reviewError.text(error.responseText);
+        });
     });
 })();
