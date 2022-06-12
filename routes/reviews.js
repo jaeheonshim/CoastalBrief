@@ -34,7 +34,8 @@ exports.newReview = async (req, res) => {
         displayName: displayName,
         picture: picture,
         rating: rating,
-        content: content
+        content: content,
+        beachId: beachId
     });
 
     await newReview.save();

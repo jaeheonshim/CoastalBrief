@@ -7,6 +7,8 @@ const reviewSchema = new mongoose.Schema({
     picture: String,
     rating: Number,
     content: String
+}, {
+    timestamps: true
 });
 
 const Review = mongoose.model("Review", reviewSchema);

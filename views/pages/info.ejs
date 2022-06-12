@@ -72,6 +72,28 @@
   <%- include("../partials/reviewform") %>
 
   <%- include("../partials/profile") %>
+
+  <section>
+    <div class="container mt-10 mx-auto mb-5">
+      <div class="flex justify-center items-center flex-wrap g-6 text-gray-800">
+        <div class="xl:w-11/12">
+          <div class="block bg-white shadow-lg rounded-lg p-3">
+            <h2 class="text-4xl font-semibold mb-1">Reviews</h2>
+            <hr>
+            <% if(locals.reviews.length == 0) { %>
+            <p>No reviews</p>
+            <% } else {
+              for(const review of reviews) {
+            %>
+            <%- include("../partials/review", {review: review}) %>
+            <% }
+            } %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <script src="/js/api.js"></script>
   <script src="/js/info.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=<%= MAPS_API_KEY %>&callback=initMap&v=weekly" defer></script>
