@@ -1,4 +1,4 @@
-const endpoint = "http://localhost:8080";
+const endpoint = "/";
 
 const API = (function () {
     const searchByLocation = (latitude, longitude) => {
